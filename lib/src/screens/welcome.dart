@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/src/animations/SlideRightRoute.dart';
 import 'package:flutter_app/src/screens/signin.dart';
 import 'package:flutter_app/src/screens/signup.dart';
+import '../config/color_constants.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 64, 155, 188),
+      backgroundColor: AppColors.backgroundScaffold,
       body: SafeArea(
           child: Center(
         child: Column(
@@ -17,20 +18,20 @@ class Welcome extends StatelessWidget {
           children: [
             Image.network(
                 "https://img.freepik.com/premium-vector/electrical-outlet-and-plug-wall-socket-with-cable-vector-illustration-in-flat-style-eps-10_505557-1672.jpg"),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            const Text('Welcome to RTChat!',
+            Text('Welcome to RTChat!',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.title,
                   fontSize: 28,
                 )),
-            const Text('Login or create your account',
+            Text('Login or create your account',
                 style: TextStyle(
-                  color: Colors.white54,
+                  color: AppColors.subtitle,
                   fontSize: 16,
                 )),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -40,8 +41,10 @@ class Welcome extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 10.0),
                   child: TextButton.icon(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.amber),
-                      foregroundColor: MaterialStateProperty.all(Colors.black),
+                      backgroundColor:
+                          MaterialStateProperty.all(AppColors.primary),
+                      foregroundColor:
+                          MaterialStateProperty.all(AppColors.black),
                       padding: MaterialStateProperty.all(
                         EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                       ),
@@ -58,8 +61,9 @@ class Welcome extends StatelessWidget {
                 ),
                 TextButton.icon(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.amber),
-                    foregroundColor: MaterialStateProperty.all(Colors.black),
+                    backgroundColor:
+                        MaterialStateProperty.all(AppColors.primary),
+                    foregroundColor: MaterialStateProperty.all(AppColors.black),
                     padding: MaterialStateProperty.all(
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                     ),
@@ -73,7 +77,7 @@ class Welcome extends StatelessWidget {
                             },
                             page: const Signup()));
                   },
-                  icon: const Icon(Icons.add_sharp),
+                  icon: const Icon(Icons.person_add),
                   label: const Text('Sign Up'),
                 )
               ],
