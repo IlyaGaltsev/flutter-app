@@ -228,13 +228,11 @@ class Signup extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              SlideRightRoute(
-                                  builder: (context) {
-                                    return const Signin();
-                                  },
-                                  page: const Signin()));
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return Signin();
+                            },
+                          ));
                         },
                         child: const Text(
                           "Do you have account? Sign in",

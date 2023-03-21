@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "346016430088",
+    "firebase_url": "https://task-manager-47ac1-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "task-manager-47ac1",
+    "storage_bucket": "task-manager-47ac1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346016430088:android:997f5ab9f882fb8d98f9bd",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346016430088-tee0djkvqagqlt7qobc5oa0e5ppmbg04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM5PmzZSKiR07-XkPzk4l5RYpyyr0zR3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346016430088-tee0djkvqagqlt7qobc5oa0e5ppmbg04.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

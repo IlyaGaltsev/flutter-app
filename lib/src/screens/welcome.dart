@@ -52,7 +52,7 @@ class Welcome extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return const Signin();
+                        return Signin();
                       }));
                     },
                     icon: const Icon(Icons.login),
@@ -69,13 +69,11 @@ class Welcome extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        SlideRightRoute(
-                            builder: (context) {
-                              return const Signup();
-                            },
-                            page: const Signup()));
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const Signup();
+                      },
+                    ));
                   },
                   icon: const Icon(Icons.person_add),
                   label: const Text('Sign Up'),

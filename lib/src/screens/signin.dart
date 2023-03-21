@@ -1,14 +1,27 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/src/animations/SlideRightRoute.dart';
 import 'package:flutter_app/src/config/color_constants.dart';
 import 'package:flutter_app/src/screens/signup.dart';
 
-final _formKey = GlobalKey<FormState>();
+class Signin extends StatefulWidget {
+  @override
+  _SigninWidgetState createState() => _SigninWidgetState();
+}
 
-class Signin extends StatelessWidget {
-  const Signin({Key? key}) : super(key: key);
+class _SigninWidgetState extends State<Signin> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,132 +41,113 @@ class Signin extends StatelessWidget {
                             foregroundColor: AppColors.title,
                           ),
                           Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 20),
-                              child: Form(
-                                key: _formKey,
-                                child: Column(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Text('Sign in',
-                                            style: TextStyle(
-                                              color: AppColors.title,
-                                              fontSize: 28,
-                                            )),
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Text('Sign in to your account',
-                                            style: TextStyle(
-                                              color: AppColors.subtitle,
-                                              fontSize: 16,
-                                            )),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      TextFormField(
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Enter something';
-                                          }
-                                          return null;
-                                        },
-                                        style:
-                                            TextStyle(color: AppColors.title),
-                                        decoration: InputDecoration(
-                                            enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  width: 3,
-                                                  color: AppColors.title),
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 3,
-                                                    color: AppColors.title)),
-                                            hintText: "Enter your email",
-                                            hintStyle: TextStyle(
-                                                fontSize: 16.0,
-                                                color: AppColors.title),
-                                            prefixIcon: const Icon(
-                                              Icons.alternate_email,
-                                              size: 28,
-                                            ),
-                                            prefixIconColor: AppColors.title),
-                                      ),
-                                      const SizedBox(
-                                        height: 12,
-                                      ),
-                                      TextFormField(
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Enter something';
-                                          }
-                                          return null;
-                                        },
-                                        style:
-                                            TextStyle(color: AppColors.title),
-                                        decoration: InputDecoration(
-                                            enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  width: 3,
-                                                  color: AppColors.title),
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 3,
-                                                    color: AppColors.title)),
-                                            hintText: "Enter your password",
-                                            hintStyle: TextStyle(
-                                                fontSize: 16.0,
-                                                color: AppColors.title),
-                                            prefixIcon: const Icon(
-                                              Icons.password,
-                                              size: 28,
-                                            ),
-                                            prefixIconColor: AppColors.title),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: ElevatedButton(
-                                            onPressed: () {
-                                              print(_formKey.currentState);
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(const SnackBar(
-                                                        content: Text(
-                                                            "Ты кнш крут")));
-                                              }
-                                            },
-                                            style: ButtonStyle(
-                                                foregroundColor:
-                                                    MaterialStateProperty.all(
-                                                        AppColors.black),
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        AppColors.primary),
-                                                padding:
-                                                    MaterialStateProperty.all<
-                                                            EdgeInsets>(
-                                                        const EdgeInsets.all(
-                                                            14))),
-                                            child: const Text(
-                                              'SIGN IN',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700),
-                                            )),
-                                      )
-                                    ]),
-                              )),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 20),
+                            child: Column(
+                                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  FractionallySizedBox(
+                                    widthFactor: 1,
+                                    child: Text('Sign in',
+                                        style: TextStyle(
+                                          color: AppColors.title,
+                                          fontSize: 28,
+                                        )),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  FractionallySizedBox(
+                                    widthFactor: 1,
+                                    child: Text('Sign in to your account',
+                                        style: TextStyle(
+                                          color: AppColors.subtitle,
+                                          fontSize: 16,
+                                        )),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  TextFormField(
+                                    controller: emailController,
+                                    textInputAction: TextInputAction.done,
+                                    style: TextStyle(color: AppColors.title),
+                                    decoration: InputDecoration(
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 3, color: AppColors.title),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 3,
+                                                color: AppColors.title)),
+                                        hintText: "Enter your email",
+                                        hintStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            color: AppColors.title),
+                                        prefixIcon: const Icon(
+                                          Icons.alternate_email,
+                                          size: 28,
+                                        ),
+                                        prefixIconColor: AppColors.title),
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  TextFormField(
+                                    // validator: (value) {
+                                    //   if (value == null || value.isEmpty) {
+                                    //     return 'Enter something';
+                                    //   }
+                                    //   return null;
+                                    // },
+                                    controller: passwordController,
+                                    textInputAction: TextInputAction.done,
+                                    style: TextStyle(color: AppColors.title),
+                                    decoration: InputDecoration(
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 3, color: AppColors.title),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 3,
+                                                color: AppColors.title)),
+                                        hintText: "Enter your password",
+                                        hintStyle: TextStyle(
+                                            fontSize: 16.0,
+                                            color: AppColors.title),
+                                        prefixIcon: const Icon(
+                                          Icons.password,
+                                          size: 28,
+                                        ),
+                                        prefixIconColor: AppColors.title),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  FractionallySizedBox(
+                                    widthFactor: 1,
+                                    child: ElevatedButton(
+                                        onPressed: signIn,
+                                        style: ButtonStyle(
+                                            foregroundColor:
+                                                MaterialStateProperty.all(
+                                                    AppColors.black),
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    AppColors.primary),
+                                            padding: MaterialStateProperty.all<
+                                                    EdgeInsets>(
+                                                const EdgeInsets.all(14))),
+                                        child: const Text(
+                                          'SIGN IN',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700),
+                                        )),
+                                  )
+                                ]),
+                          ),
                         ],
                       ),
                       TextButton(
@@ -166,13 +160,11 @@ class Signin extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              SlideRightRoute(
-                                  builder: (context) {
-                                    return const Signup();
-                                  },
-                                  page: const Signup()));
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const Signup();
+                            },
+                          ));
                         },
                         child: const Text(
                           "Don`t have account? Create account",
@@ -181,5 +173,15 @@ class Signin extends StatelessWidget {
                         // label: const Text('Sign Up'),
                       )
                     ]))));
+  }
+
+  Future signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
   }
 }
